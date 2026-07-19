@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Design-tool working files
+.thumbnail
+
+# Raw photo dumps / working screenshots (site only uses assets/)
+first-bnb/uploads/
+
+# Design exports
+*.zip
