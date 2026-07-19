@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home carousel photos</title>
+<style>
+  body{margin:0;background:#12343B;color:#fff;font-family:system-ui,sans-serif;padding:32px;}
+  h1{font-size:20px;font-weight:600;margin:0 0 24px;color:#E7C889;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+  figure{margin:0;background:#0d2429;border-radius:12px;overflow:hidden;}
+  figure img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#1b3d44;}
+  figcaption{padding:10px 14px;font-size:13px;color:#cfe0de;display:flex;gap:8px;}
+  .n{color:#E7C889;font-weight:700;}
+</style>
+</head>
+<body>
+  <h1>Home hero carousel — 10 photos, in order</h1>
+  <div class="grid" id="g"></div>
+  <script>
+    const items = [
+      ['assets/chania-harbour-pano.jpg','Chania harbour panorama (Wikimedia)'],
+      ['assets/chania-tavernas.jpg','Chania waterfront tavernas + mosque (Wikimedia)'],
+      ['assets/chania-lighthouse.jpg','Venetian lighthouse (Wikimedia)'],
+      ['assets/apt1-terrace-1.jpg','Apt I — terrace 1'],
+      ['assets/apt1-terrace-8.jpg','Apt I — terrace 8'],
+      ['assets/apt1-bed-1.jpg','Apt I — bedroom 1'],
+      ['assets/apt2-terrace-2.jpg','Apt II — terrace 2'],
+      ['assets/apt2-terrace-3.jpg','Apt II — terrace 3'],
+      ['assets/apt2-living-1.jpg','Apt II — living room 1'],
+      ['assets/apt1-kitchen-1.jpg','Apt I — kitchen 1'],
+    ];
+    document.getElementById('g').innerHTML = items.map((it,i)=>
+      `<figure><img src="${it[0]}" alt=""><figcaption><span class="n">${i+1}.</span> ${it[1]}</figcaption></figure>`
+    ).join('');
+  </script>
+</body>
+</html>

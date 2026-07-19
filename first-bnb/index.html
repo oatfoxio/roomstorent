@@ -34,7 +34,8 @@ input, textarea, select { font-family: inherit; }
         <span style="font-family:'Marcellus',serif;font-size:14px;color:#B98A34;letter-spacing:3px;">I · II</span>
         <span style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6E8583;font-weight:600;">Luxury Apartments</span>
       </div>
-      <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;">
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:26px;">
         <a onClick="{{ nav.home }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ c.home }};">{{ t.nav.home }}</a>
         <a onClick="{{ nav.apartments }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ c.apts }};">{{ t.nav.apartments }}</a>
         <a onClick="{{ nav.location }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ c.loc }};">{{ t.nav.location }}</a>
@@ -46,7 +47,31 @@ input, textarea, select { font-family: inherit; }
         </div>
         <button onClick="{{ nav.booking }}" style="background:#B98A34;color:#fff;border:none;padding:11px 22px;border-radius:999px;font-weight:700;font-size:14px;letter-spacing:.3px;cursor:pointer;" style-hover="background:#a2761f;">{{ t.nav.book }}</button>
       </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="display:flex;align-items:center;gap:2px;font-size:14px;font-weight:700;color:#6E8583;">
+          <span onClick="{{ setEn }}" style="cursor:pointer;padding:2px 6px;color:{{ c.en }};">EN</span>
+          <span style="color:#C4CFCD;">/</span>
+          <span onClick="{{ setEl }}" style="cursor:pointer;padding:2px 6px;color:{{ c.el }};">ΕΛ</span>
+        </div>
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="background:none;border:none;padding:6px;cursor:pointer;display:flex;flex-direction:column;gap:5px;width:38px;">
+          <span style="display:block;height:2px;background:#12343B;border-radius:2px;"></span>
+          <span style="display:block;height:2px;background:#12343B;border-radius:2px;"></span>
+          <span style="display:block;height:2px;background:#12343B;border-radius:2px;"></span>
+        </button>
+      </div>
+      </sc-if>
     </nav>
+    <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid rgba(18,52,59,0.1);padding:8px 24px 20px;display:flex;flex-direction:column;gap:2px;background:rgba(250,248,243,0.98);">
+        <a onClick="{{ nav.home }}" style="cursor:pointer;font-weight:600;font-size:17px;color:{{ c.home }};padding:13px 0;border-bottom:1px solid rgba(18,52,59,0.06);">{{ t.nav.home }}</a>
+        <a onClick="{{ nav.apartments }}" style="cursor:pointer;font-weight:600;font-size:17px;color:{{ c.apts }};padding:13px 0;border-bottom:1px solid rgba(18,52,59,0.06);">{{ t.nav.apartments }}</a>
+        <a onClick="{{ nav.location }}" style="cursor:pointer;font-weight:600;font-size:17px;color:{{ c.loc }};padding:13px 0;border-bottom:1px solid rgba(18,52,59,0.06);">{{ t.nav.location }}</a>
+        <a onClick="{{ nav.contact }}" style="cursor:pointer;font-weight:600;font-size:17px;color:{{ c.contact }};padding:13px 0;border-bottom:1px solid rgba(18,52,59,0.06);">{{ t.nav.contact }}</a>
+        <button onClick="{{ nav.booking }}" style="margin-top:14px;background:#B98A34;color:#fff;border:none;padding:15px;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;">{{ t.nav.book }}</button>
+      </div>
+    </sc-if>
   </header>
 
   <main style="flex:1;">
@@ -62,16 +87,12 @@ input, textarea, select { font-family: inherit; }
       </div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(9,30,35,0.78) 0%, rgba(9,30,35,0.25) 42%, rgba(9,30,35,0.04) 100%);"></div>
       <div style="position:relative;max-width:1180px;margin:0 auto;padding:0 24px clamp(48px,7vw,84px);width:100%;color:#fff;">
-        <div style="font-size:clamp(16px,2vw,22px);letter-spacing:4px;text-transform:uppercase;color:#E7C889;font-weight:600;margin-bottom:18px;">{{ t.home.heroKicker }}</div>
+        <div style="display:inline-block;font-size:clamp(16px,2vw,22px);letter-spacing:4px;text-transform:uppercase;color:#E7C889;font-weight:800;margin-bottom:18px;text-shadow:0 2px 12px rgba(9,20,24,0.6);">{{ t.home.heroKicker }}</div>
         <h1 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(38px,6vw,70px);line-height:1.04;margin:0 0 20px;max-width:16ch;">{{ t.home.heroTitle }}</h1>
         <p style="font-size:clamp(16px,1.7vw,20px);line-height:1.5;max-width:52ch;margin:0 0 32px;color:rgba(255,255,255,0.92);">{{ t.home.heroText }}</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;">
           <button onClick="{{ nav.apartments }}" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.6);padding:15px 30px;border-radius:999px;font-weight:600;font-size:16px;cursor:pointer;backdrop-filter:blur(4px);" style-hover="background:rgba(255,255,255,0.22);">{{ t.home.ctaExplore }}</button>
-        </div>
-        <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:34px;font-size:14px;color:rgba(255,255,255,0.9);">
-          <span>⌂ {{ t.home.trustLoc }}</span>
-          <span>⚓ {{ t.home.trustPort }}</span>
-          <span>◈ {{ t.home.trustPrice }}</span>
+          <button onClick="{{ scrollReviews }}" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.6);padding:15px 30px;border-radius:999px;font-weight:600;font-size:16px;cursor:pointer;backdrop-filter:blur(4px);" style-hover="background:rgba(255,255,255,0.22);">{{ t.home.ctaReviews }}</button>
         </div>
       </div>
     </section>
@@ -86,16 +107,16 @@ input, textarea, select { font-family: inherit; }
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div style="background:#F1EDE4;border-radius:14px;padding:26px 22px;">
-          <div style="font-family:'Marcellus',serif;font-size:40px;color:#1C6E7D;line-height:1;">2</div>
-          <div style="font-size:14px;color:#3E5A57;margin-top:8px;">{{ t.home.statApts }}</div>
-        </div>
-        <div style="background:#F1EDE4;border-radius:14px;padding:26px 22px;">
           <div style="font-family:'Marcellus',serif;font-size:40px;color:#1C6E7D;line-height:1;">5'</div>
           <div style="font-size:14px;color:#3E5A57;margin-top:8px;">{{ t.home.statBeach }}</div>
         </div>
         <div style="background:#F1EDE4;border-radius:14px;padding:26px 22px;">
           <div style="font-family:'Marcellus',serif;font-size:40px;color:#1C6E7D;line-height:1;">10'</div>
           <div style="font-size:14px;color:#3E5A57;margin-top:8px;">{{ t.home.statOld }}</div>
+        </div>
+        <div style="background:#F1EDE4;border-radius:14px;padding:26px 22px;">
+          <div style="font-family:'Marcellus',serif;font-size:40px;color:#1C6E7D;line-height:1;">2</div>
+          <div style="font-size:14px;color:#3E5A57;margin-top:8px;">{{ t.home.statApts }}</div>
         </div>
         <div style="background:#12343B;border-radius:14px;padding:26px 22px;color:#fff;">
           <div style="font-family:'Marcellus',serif;font-size:40px;color:#E7C889;line-height:1;">24/7</div>
@@ -136,6 +157,35 @@ input, textarea, select { font-family: inherit; }
       </div>
     </section>
 
+    <!-- guest reviews -->
+    <section id="reviews-section" style="background:#fff;">
+      <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px;">
+        <div style="text-align:center;margin-bottom:52px;">
+          <div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#B98A34;font-weight:600;margin-bottom:14px;">{{ t.home.reviewsKicker }}</div>
+          <h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,3.6vw,44px);margin:0;color:#12343B;">{{ t.home.reviewsTitle }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;">
+          <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="4">
+            <div style="background:#FAF8F3;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column;gap:16px;">
+              <div style="font-family:'Marcellus',serif;font-size:40px;line-height:.6;color:#E7C889;height:22px;">“</div>
+              <p style="font-size:16px;line-height:1.65;color:#3E5A57;margin:0;flex:1;">{{ r.quote }}</p>
+              <div style="border-top:1px solid rgba(18,52,59,0.1);padding-top:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                  <span style="font-family:'Marcellus',serif;font-size:18px;color:#12343B;">{{ r.name }}</span>
+                  <span style="font-size:13px;color:#1C6E7D;font-weight:700;">{{ r.score }}</span>
+                </div>
+                <div style="font-size:13px;color:#8A9A98;margin-top:3px;">{{ r.meta }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:44px;">
+          <a href="https://www.airbnb.co.uk/users/profile/1646195687383497844" target="_blank" rel="noopener" style="background:#12343B;color:#fff;text-decoration:none;padding:13px 26px;border-radius:999px;font-weight:700;font-size:15px;" style-hover="background:#1C6E7D;">{{ t.home.reviewsAirbnb }}</a>
+          <a href="https://www.booking.com/Share-19bZ9ki" target="_blank" rel="noopener" style="background:#fff;color:#12343B;text-decoration:none;padding:13px 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid rgba(18,52,59,0.15);" style-hover="border-color:#12343B;">{{ t.home.reviewsBooking }}</a>
+        </div>
+      </div>
+    </section>
+
     <!-- why book direct -->
     <section style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px;">
       <div style="text-align:center;margin-bottom:52px;">
@@ -155,7 +205,7 @@ input, textarea, select { font-family: inherit; }
 
     <!-- location teaser -->
     <section style="position:relative;overflow:hidden;">
-      <img src="assets/nea-chora-hero.jpg" alt="Nea Chora Harbour in Chania" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <img src="assets/neighbourhood.jpg" alt="Chania Venetian Harbour" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,30,35,0.85) 0%,rgba(9,30,35,0.55) 55%,rgba(9,30,35,0.2) 100%);"></div>
       <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(72px,10vw,130px) 24px;color:#fff;">
         <div style="max-width:44ch;">
@@ -187,9 +237,9 @@ input, textarea, select { font-family: inherit; }
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-bottom:44px;">
       <sc-for list="{{ features }}" as="f" hint-placeholder-count="4">
-        <div style="background:#fff;border:1px solid rgba(18,52,59,0.08);border-radius:14px;padding:22px;">
-          <span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:#1C6E7D;color:#fff;align-items:center;justify-content:center;margin-bottom:14px;">{{ f.icon }}</span>
-          <h3 style="font-family:'Marcellus',serif;font-weight:400;font-size:18px;margin:0 0 6px;color:#12343B;">{{ f.title }}</h3>
+        <div style="border-top:2px solid #B98A34;padding-top:22px;">
+          <div style="color:#1C6E7D;margin-bottom:14px;height:26px;">{{ f.icon }}</div>
+          <h3 style="font-family:'Marcellus',serif;font-weight:400;font-size:20px;margin:0 0 8px;color:#12343B;">{{ f.title }}</h3>
           <p style="font-size:14px;line-height:1.55;color:#3E5A57;margin:0;">{{ f.text }}</p>
         </div>
       </sc-for>
@@ -253,8 +303,8 @@ input, textarea, select { font-family: inherit; }
           <p style="font-size:15px;line-height:1.6;color:#3E5A57;margin:0 0 16px;max-width:none;">{{ s.text }}</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
             <sc-for list="{{ s.photos }}" as="p" hint-placeholder-count="2">
-              <div style="aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#EFE9DD;">
-                <img src="{{ p }}" alt="{{ s.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+              <div onClick="{{ p.onOpen }}" style="aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#EFE9DD;cursor:zoom-in;">
+                <img src="{{ p.src }}" alt="{{ p.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;" style-hover="transform:scale(1.05)">
               </div>
             </sc-for>
           </div>
@@ -351,7 +401,7 @@ input, textarea, select { font-family: inherit; }
           <sc-for list="{{ aptTabs }}" as="tab" hint-placeholder-count="2">
             <button onClick="{{ tab.onPick }}" style="flex:1;min-width:180px;text-align:left;background:{{ tab.bg }};color:{{ tab.fg }};border:1px solid {{ tab.border }};padding:16px 18px;border-radius:12px;cursor:pointer;">
               <div style="font-family:'Marcellus',serif;font-size:24px;line-height:1;margin-bottom:6px;">{{ tab.num }} · {{ tab.name }}</div>
-              <div style="font-size:13px;opacity:.85;">{{ tab.sleeps }} · {{ t.apartments.from }} €{{ tab.priceFrom }}</div>
+              <div style="font-size:13px;opacity:.85;">{{ tab.sleeps }}</div>
             </button>
           </sc-for>
         </div>
@@ -420,10 +470,7 @@ input, textarea, select { font-family: inherit; }
         </sc-if>
 
         <button onClick="{{ proceed }}" style="width:100%;background:{{ payBg }};color:#fff;border:none;padding:15px;border-radius:12px;font-weight:700;font-size:16px;cursor:{{ payCursor }};margin-top:12px;" style-hover="{{ payHover }}">{{ t.booking.proceed }}</button>
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:12px;color:#8A9A98;">
-          <span>🔒</span><span>{{ t.booking.securedBy }}</span>
-        </div>
-        <div style="font-size:12px;color:#8A9A98;text-align:center;margin-top:6px;">{{ t.booking.minStay }}</div>
+        <div style="font-size:12px;color:#8A9A98;text-align:center;margin-top:14px;">{{ t.booking.minStay }}</div>
       </div>
     </div>
   </div>
@@ -531,6 +578,21 @@ input, textarea, select { font-family: inherit; }
     </div>
   </footer>
 
+  <sc-if value="{{ lb.open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lb.onClose }}" style="position:fixed;inset:0;z-index:1000;background:rgba(9,20,24,0.94);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <button onClick="{{ lb.onClose }}" title="Close" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,0.12);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:22px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">×</button>
+      <button onClick="{{ lb.onPrev }}" title="Previous" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:26px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">‹</button>
+      <button onClick="{{ lb.onNext }}" title="Next" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:26px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">›</button>
+      <div onClick="{{ lb.stop }}" style="max-width:min(1100px,92vw);max-height:86vh;display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <img src="{{ lb.src }}" alt="{{ lb.caption }}" style="max-width:100%;max-height:76vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+        <div style="display:flex;align-items:center;gap:16px;color:rgba(255,255,255,0.9);font-size:14px;">
+          <span style="font-family:'Marcellus',serif;letter-spacing:0.5px;">{{ lb.caption }}</span>
+          <span style="opacity:0.6;">{{ lb.counter }}</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -551,16 +613,29 @@ class Component extends DCLogic {
 
   // ---- i18n dictionary ----
   heroPhotoList() {
-    return ['assets/apt1-bed-1.jpg','assets/apt2-terrace-2.jpg','assets/apt2-terrace-3.jpg','assets/apt2-living-1.jpg','assets/apt1-kitchen-1.jpg','assets/apt1-terrace-1.jpg','assets/apt1-terrace-8.jpg'];
+    return ['assets/chania-sunset.jpg','assets/apt1-bed-1.jpg','assets/apt2-terrace-2.jpg','assets/apt2-terrace-3.jpg','assets/apt2-living-1.jpg','assets/apt1-terrace-8.jpg','assets/apt1-terrace-1.jpg','assets/apt1-kitchen-1.jpg'];
   }
   componentDidMount() {
     this.__heroTimer = setInterval(() => {
       const n = this.heroPhotoList().length;
       this.setState(s => ({ heroIndex: ((s.heroIndex||0) + 1) % n }));
     }, 4500);
+    this.__onKey = (e) => {
+      if (this.state.lightbox === null || this.state.lightbox === undefined) return;
+      const total = this.sectionsData(this.state.page==='apt2'?2:1).reduce((a,s)=>a+(s.photos?s.photos.length:0),0);
+      if (e.key === 'Escape') this.setState({ lightbox: null });
+      else if (e.key === 'ArrowLeft') this.setState(s=>({ lightbox: (s.lightbox - 1 + total) % total }));
+      else if (e.key === 'ArrowRight') this.setState(s=>({ lightbox: (s.lightbox + 1) % total }));
+    };
+    window.addEventListener('keydown', this.__onKey);
+    this.__onResize = () => { const m = window.innerWidth < 860; if (m !== this.__wasMobile) { this.__wasMobile = m; this.forceUpdate(); } };
+    this.__wasMobile = window.innerWidth < 860;
+    window.addEventListener('resize', this.__onResize);
   }
   componentWillUnmount() {
     if (this.__heroTimer) clearInterval(this.__heroTimer);
+    if (this.__onKey) window.removeEventListener('keydown', this.__onKey);
+    if (this.__onResize) window.removeEventListener('resize', this.__onResize);
   }
 
   dict() {
@@ -568,18 +643,20 @@ class Component extends DCLogic {
       en: {
         nav: { home:'Home', apartments:'Apartments', location:'Location', contact:'Contact', book:'Book Now' },
         home: {
-          heroKicker:'Nea Chora · Chania · Crete',
+          heroKicker:'Chania · Crete',
           heroTitle:'Two luxury apartments, steps from the Cretan sea',
           heroText:'A private jacuzzi terrace, secure parking, and the beach five minutes from your door. Newly opened in Nea Chora and available to book direct.',
           ctaBook:'Check availability', ctaExplore:'View the apartments',
-          trustNew:'Newly opened for 2026', trustPrice:'Best price, booked direct', trustLoc:'5 min to Nea Chora beach', trustPort:'10 min to the Venetian port',
+          trustNew:'Newly opened for 2026', trustPrice:'Best price, booked direct', trustLoc:'5 min to Nea Chora beach', trustPort:'10 min to the Old Town',
           welcomeKicker:'Welcome', welcomeTitle:'Your home base in the heart of Chania',
           welcomeText1:'2bb is two thoughtfully designed apartments in Nea Chora, Chania\u2019s authentic seaside neighbourhood, where fishing tavernas line the shore and the Venetian Old Town is a flat ten-minute stroll away.',
           welcomeText2:'Each apartment has its own private terrace with a two-person jacuzzi, full air-conditioning, underfloor heating for the cooler months, and the rare luxury of secure private parking.',
           statApts:'Private apartments', statBeach:'Walk to the beach', statOld:'Walk to Old Town', statHost:'Host on hand',
           aptsKicker:'The apartments', aptsTitle:'Choose your stay',
           whyKicker:'Book direct', whyTitle:'Why book with us directly',
-          locKicker:'The location', locTitle:'A neighbourhood worth staying in',
+          reviewsKicker:'Guest reviews', reviewsTitle:'What guests say', reviewsAirbnb:'Read reviews on Airbnb', reviewsBooking:'Read reviews on Booking.com',
+          ctaReviews:'View reviews',
+          locKicker:'Nea Chora · Chania', locTitle:'A neighbourhood worth staying in',
           locText:'Morning swims at Nea Chora beach, fresh fish at sunset, and the alleys of the Venetian Old Town on your doorstep. This is Chania at its most genuine.',
           locCta:'Explore the area',
           closingTitle:'Ready when you are', closingText:'Pick your dates, choose Apartment I or II, and book directly with us, no booking fees, best rate guaranteed.',
@@ -630,7 +707,7 @@ class Component extends DCLogic {
       el: {
         nav: { home:'Αρχική', apartments:'Διαμερίσματα', location:'Τοποθεσία', contact:'Επικοινωνία', book:'Κράτηση' },
         home: {
-          heroKicker:'Νέα Χώρα · Χανιά · Κρήτη',
+          heroKicker:'Χανιά · Κρήτη',
           heroTitle:'Δύο πολυτελή διαμερίσματα, δίπλα στην κρητική θάλασσα',
           heroText:'Ιδιωτική βεράντα με τζακούζι, ασφαλές πάρκινγκ και η παραλία πέντε λεπτά από την πόρτα σας. Νέα διαμερίσματα στη Νέα Χώρα, με απευθείας κράτηση.',
           ctaBook:'Δείτε διαθεσιμότητα', ctaExplore:'Δείτε τα διαμερίσματα',
@@ -641,7 +718,9 @@ class Component extends DCLogic {
           statApts:'Ιδιωτικά διαμερίσματα', statBeach:'Με τα πόδια στην παραλία', statOld:'Με τα πόδια στην Παλιά Πόλη', statHost:'Οικοδεσπότης κοντά σας',
           aptsKicker:'Τα διαμερίσματα', aptsTitle:'Επιλέξτε τη διαμονή σας',
           whyKicker:'Απευθείας κράτηση', whyTitle:'Γιατί να κλείσετε απευθείας μαζί μας',
-          locKicker:'Η τοποθεσία', locTitle:'Μια γειτονιά που αξίζει να μείνετε',
+          reviewsKicker:'Κριτικές επισκεπτών', reviewsTitle:'Τι λένε οι επισκέπτες', reviewsAirbnb:'Διαβάστε κριτικές στο Airbnb', reviewsBooking:'Διαβάστε κριτικές στο Booking.com',
+          ctaReviews:'Δείτε κριτικές',
+          locKicker:'Νέα Χώρα · Χανιά', locTitle:'Μια γειτονιά που αξίζει να μείνετε',
           locText:'Πρωινές βουτιές στην παραλία της Νέας Χώρας, φρέσκο ψάρι το ηλιοβασίλεμα και τα σοκάκια της ενετικής Παλιάς Πόλης δίπλα σας. Αυτά είναι τα Χανιά στην πιο αυθεντική τους εκδοχή.',
           locCta:'Εξερευνήστε την περιοχή',
           closingTitle:'Έτοιμοι όποτε είστε', closingText:'Επιλέξτε ημερομηνίες, διαλέξτε Διαμέρισμα I ή II και κλείστε απευθείας μαζί μας, χωρίς χρεώσεις κράτησης, με εγγυημένα την καλύτερη τιμή.',
@@ -737,6 +816,32 @@ class Component extends DCLogic {
     ];
   }
 
+  reviewsData() {
+    const en = this.state.lang === 'en';
+    return [
+      {
+        quote: en?'The perfect home away from home, thoughtful amenities, an amazing location, and everything we needed.'
+                 :'Το τέλειο σπίτι μακριά από το σπίτι, με προσεγμένες ανέσεις, υπέροχη τοποθεσία και ό,τι χρειαζόμασταν.',
+        name:'Ben', meta: en?'Booking.com · May 2026':'Booking.com · Μάιος 2026', score:'★★★★★',
+      },
+      {
+        quote: en?'The best addition was free parking in the building, it can be almost impossible to find a spot in the area.'
+                 :'Η καλύτερη προσθήκη ήταν το δωρεάν πάρκινγκ στο κτίριο, είναι σχεδόν αδύνατο να βρεις θέση στην περιοχή.',
+        name:'Kia', meta: en?'Airbnb · June 2026':'Airbnb · Ιούνιος 2026', score:'★★★★★',
+      },
+      {
+        quote: en?'Fully modern and in a great walkable location, welcome snacks and drinks were waiting for us.'
+                 :'Απόλυτα μοντέρνο και σε εξαιρετική τοποθεσία με τα πόδια, με σνακ και ποτά καλωσορίσματος να μας περιμένουν.',
+        name:'Alexandra', meta: en?'Airbnb · May 2026':'Airbnb · Μάιος 2026', score:'★★★★★',
+      },
+      {
+        quote: en?'A lovely new apartment close to Nea Chora beach and the centre of Chania and the old town, we especially liked the large terrace area.'
+                 :'Ένα υπέροχο νέο διαμέρισμα κοντά στην παραλία της Νέας Χώρας και στο κέντρο των Χανίων και την παλιά πόλη, μας άρεσε ιδιαίτερα ο μεγάλος χώρος της βεράντας.',
+        name:'Kirsi', meta: en?'Airbnb · July 2026':'Airbnb · Ιούλιος 2026', score:'★★★★★',
+      },
+    ];
+  }
+
   whyData() {
     const en = this.state.lang === 'en';
     const R = React;
@@ -778,7 +883,7 @@ class Component extends DCLogic {
     const gm = en?'View in Maps':'Δείτε στον χάρτη';
     return [
       { name: en?'Nea Chora Beach':'Παραλία Νέας Χώρας', time: en?'5 min walk':'5 λεπτά με τα πόδια', icon: beach, gm, url:'https://maps.app.goo.gl/TRufoCbgFSbU38uu6' },
-      { name: en?'Old Venetian Port':'Ενετικό Λιμάνι', time: en?'10 min walk':'10 λεπτά με τα πόδια', icon: landmark, gm, url:'https://maps.app.goo.gl/xDQPayyZTb8YYvrK8' },
+      { name: en?'Old Town':'Παλιά Πόλη', time: en?'10 min walk':'10 λεπτά με τα πόδια', icon: landmark, gm, url:'https://maps.app.goo.gl/xDQPayyZTb8YYvrK8' },
       { name: en?'Central Bus Station':'Κεντρικός Σταθμός Λεωφορείων', time: en?'12 min walk':'12 λεπτά με τα πόδια', icon: bus, gm, url:'https://maps.app.goo.gl/qrBGJTNGqiQs14xb8' },
     ];
   }
@@ -803,7 +908,7 @@ class Component extends DCLogic {
   signatureFeatures() {
     const en = this.state.lang === 'en';
     const R = React;
-    const svg = (kids) => R.createElement('svg', {width:21,height:21,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.9,strokeLinecap:'round',strokeLinejoin:'round'}, ...kids);
+    const svg = (kids) => R.createElement('svg', {width:26,height:26,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.8,strokeLinecap:'round',strokeLinejoin:'round'}, ...kids);
     const P = (d) => R.createElement('path',{d});
     const jacuzzi = svg([ P('M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'), P('M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'), P('M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1') ]);
     const parking = svg([ R.createElement('rect',{width:18,height:18,x:3,y:3,rx:2}), P('M9 17V7h4a3 3 0 0 1 0 6H9') ]);
@@ -821,7 +926,7 @@ class Component extends DCLogic {
     const en = this.state.lang === 'en';
     return [
       { label: en?'Nea Chora beach':'Παραλία Νέας Χώρας', val: en?'5 min walk':'5 λεπτά' },
-      { label: en?'Old Venetian Port':'Ενετικό Λιμάνι', val: en?'10 min walk':'10 λεπτά' },
+      { label: en?'Old Town':'Παλιά Πόλη', val: en?'10 min walk':'10 λεπτά' },
       { label: en?'Municipal Market':'Δημοτική Αγορά', val: en?'12 min walk':'12 λεπτά' },
       { label: en?'Central Bus Station':'Κεντρικός Σταθμός Λεωφορείων', val: en?'12 min walk':'12 λεπτά' },
     ];
@@ -913,7 +1018,7 @@ class Component extends DCLogic {
       const iso = this.iso(y,m,d);
       const dt = new Date(y,m,d);
       const past = dt < today;
-      const isBlocked = blocked.has(iso) || past;
+      const isBlocked = true;
       const isIn = checkIn===iso, isOut = checkOut===iso;
       const inRange = checkIn && checkOut && iso>checkIn && iso<checkOut;
       let bg='#F1EDE4', fg='#12343B', opacity='1', border='1px solid transparent', cursor='pointer';
@@ -921,7 +1026,7 @@ class Component extends DCLogic {
       if (inRange){ bg='#CFE3E5'; fg='#12343B'; }
       if (isIn||isOut){ bg='#1C6E7D'; fg='#fff'; }
       cells.push({
-        blank:false, day:String(d), price:isBlocked?'-':('€'+price),
+        blank:false, day:String(d), price:'',
         bg, fg, opacity, border, cursor,
         onClick: isBlocked ? (()=>{}) : (()=>this.pickDate(iso)),
       });
@@ -957,7 +1062,7 @@ class Component extends DCLogic {
     return Math.round((new Date(checkOut)-new Date(checkIn))/86400000);
   }
 
-  navTo(page, extra) { this.setState({ page, ...(extra||{}) }); window.scrollTo(0,0); }
+  navTo(page, extra) { this.setState({ page, menuOpen:false, ...(extra||{}) }); window.scrollTo(0,0); }
 
   renderVals() {
     const S = this.state;
@@ -989,7 +1094,31 @@ class Component extends DCLogic {
 
     const detailApt = apts.find(a => a.id === (page==='apt2'?2:1)) || apts[0];
     const galleryItems = (detailApt.gallery||[]).map(g => (typeof g==='string' && (g.indexOf('assets/')===0 || g.indexOf('http')===0)) ? {isPhoto:true,notPhoto:false,src:g,label:''} : {isPhoto:false,notPhoto:true,src:'',label:g});
-    const apt = { ...detailApt, galleryItems, tagline: detone(detailApt.tagline), sections: this.sectionsData(detailApt.id), onBook: ()=>this.navTo('booking', { bkApt:detailApt.id, guests:Math.min(S.guests,detailApt.max), checkIn:null, checkOut:null }) };
+    const rawSections = this.sectionsData(detailApt.id);
+    const allPhotos = [];
+    const dSections = rawSections.map(s => ({
+      ...s,
+      photos: (s.photos||[]).map(src => {
+        const idx = allPhotos.length;
+        allPhotos.push({ src, caption: s.title });
+        return { src, title: s.title, onOpen: ()=>this.setState({ lightbox: idx }) };
+      })
+    }));
+    const apt = { ...detailApt, galleryItems, tagline: detone(detailApt.tagline), sections: dSections, onBook: ()=>this.navTo('booking', { bkApt:detailApt.id, guests:Math.min(S.guests,detailApt.max), checkIn:null, checkOut:null }) };
+
+    const lbOpen = S.lightbox !== null && S.lightbox !== undefined;
+    const lbTotal = allPhotos.length;
+    const lbCur = lbOpen ? allPhotos[S.lightbox] : null;
+    const lb = {
+      open: lbOpen, closed: !lbOpen,
+      src: lbCur ? lbCur.src : '',
+      caption: lbCur ? lbCur.caption : '',
+      counter: lbOpen ? ((S.lightbox+1) + ' / ' + lbTotal) : '',
+      onClose: ()=>this.setState({ lightbox: null }),
+      onPrev: (e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.setState(st=>({ lightbox: (st.lightbox - 1 + lbTotal) % lbTotal })); },
+      onNext: (e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.setState(st=>({ lightbox: (st.lightbox + 1) % lbTotal })); },
+      stop: (e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); },
+    };
 
     // booking
     const sel = apts.find(a => a.id === S.bkApt) || apts[0];
@@ -1012,8 +1141,14 @@ class Component extends DCLogic {
     const nightsWord = S.lang==='el' ? 'βράδια' : (n===1?'night':'nights');
 
     return {
-      t: D, lang: S.lang, nav,
+      t: D, lang: S.lang, nav, lb,
       setEn: ()=>this.setState({ lang:'en' }), setEl: ()=>this.setState({ lang:'el' }),
+      scrollReviews: ()=>{ const el=document.getElementById('reviews-section'); if(el){ const y=el.getBoundingClientRect().top+window.pageYOffset-70; window.scrollTo({top:y,behavior:'smooth'}); } },
+      isMobile: (typeof window!=='undefined' && window.innerWidth < 860),
+      notMobile: !(typeof window!=='undefined' && window.innerWidth < 860),
+      menuOpen: !!S.menuOpen, menuClosed: !S.menuOpen,
+      toggleMenu: ()=>this.setState(st=>({ menuOpen: !st.menuOpen })),
+      showMobileMenu: (typeof window!=='undefined' && window.innerWidth < 860) && !!S.menuOpen,
       c: {
         home: activeC(page==='home'), apts: activeC(page==='apartments'||isDetail),
         loc: activeC(page==='location'), contact: activeC(page==='contact'),
@@ -1023,7 +1158,7 @@ class Component extends DCLogic {
       isLocation: page==='location', isBooking: page==='booking', isConfirm: page==='confirm',
       isContact: page==='contact', isLegal: page==='legal',
       aptCards, apt,
-      why: this.whyData(), hotel: this.hotelData(), mapPoints: this.mapPointsData(), distances: this.distancesData(), features: this.signatureFeatures(),
+      why: this.whyData(), reviews: this.reviewsData(), hotel: this.hotelData(), mapPoints: this.mapPointsData(), distances: this.distancesData(), features: this.signatureFeatures(),
       heroSlides: this.heroPhotoList().map((src,i)=>({ src, opacity: i===(S.heroIndex||0) ? 1 : 0 })),
       rules: this.rulesData(), contactInfo: this.contactInfoData().map(ci=>({...ci,label:detone(ci.label)})), legalSections: this.legalData(),
       // booking
